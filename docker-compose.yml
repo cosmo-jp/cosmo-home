@@ -1,0 +1,26 @@
+services:
+  cosmo-home-build:
+    image: node:24-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run build"
+    volumes:
+      - .:/app
+      - cosmo-home-build-node-modules:/app/node_modules
+      - cosmo-home-dist:/app/dist
+
+  nginx:
+    image: nginx:1.27-alpine
+    depends_on:
+      cosmo-home-build:
+        condition: service_completed_successfully
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - cosmo-home-dist:/usr/share/nginx/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+
+volumes:
+  cosmo-home-build-node-modules:
+  cosmo-home-dist:
