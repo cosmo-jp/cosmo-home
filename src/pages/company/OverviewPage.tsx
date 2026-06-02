@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 function OverviewPage() {
   return (
     <main className="sub-page">
-      <section className="sub-hero">
+      <section className="sub-hero banner-message">
         <Container fluid>
           <h1>회사개요</h1>
         </Container>

@@ -72,10 +72,12 @@ const COMPANY_POSITION: LatLngLiteral = {
   lng: 139.7780309,
 }
 
+const GOOGLE_ROUTE_BLUE = '#4285f4'
+
 const ROUTE_ORIGINS = [
-  { name: '築地駅', origin: '築地駅, 東京都中央区', color: '#2563eb' },
-  { name: '新富町駅', origin: '新富町駅, 東京都中央区', color: '#d71920' },
-  { name: '月島駅', origin: '月島駅, 東京都中央区', color: '#059669' },
+  { name: '築地駅', origin: '築地駅, 東京都中央区' },
+  { name: '新富町駅', origin: '新富町駅, 東京都中央区' },
+  { name: '月島駅', origin: '月島駅, 東京都中央区' },
 ]
 
 const GOOGLE_MAP_SCRIPT_ID = 'google-maps-js-api'
@@ -179,10 +181,10 @@ function GoogleMap() {
         ROUTE_ORIGINS.forEach((route) => {
           const directionsRenderer = new google.maps.DirectionsRenderer({
             map,
-            suppressMarkers: false,
+            suppressMarkers: true,
             preserveViewport: true,
             polylineOptions: {
-              strokeColor: route.color,
+              strokeColor: GOOGLE_ROUTE_BLUE,
               strokeOpacity: 0.85,
               strokeWeight: 5,
             },

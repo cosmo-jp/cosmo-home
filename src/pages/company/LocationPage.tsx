@@ -1,11 +1,14 @@
 import { Container } from 'react-bootstrap'
 import GoogleMap from '../../components/GoogleMap'
+import mapsFlagsIcon from '../../assets/icon/maps-flags.png'
+import phoneIcon from '../../assets/icon/phone.png'
+import printerIcon from '../../assets/icon/printer.png'
 import '../../styles/LocationPage.css'
 
 function LocationPage() {
   return (
     <main className="sub-page location-page">
-      <section className="sub-hero">
+      <section className="sub-hero banner-message">
         <Container fluid>
           <h1>오시는길</h1>
         </Container>
@@ -18,21 +21,21 @@ function LocationPage() {
         <div className="location-info-grid">
           <article className="location-info-card">
             <div className="location-info-icon" aria-hidden="true">
-              {/* 電話아이콘 추가 */}
+              <img src={phoneIcon} alt="" />
             </div>
             <h2>電話</h2>
             <p>03-5835-3771</p>
           </article>
           <article className="location-info-card">
             <div className="location-info-icon" aria-hidden="true">
-              {/* FAX아이콘 추가 */}
+              <img src={printerIcon} alt="" />
             </div>
             <h2>FAX</h2>
             <p>03-5835-3772</p>
           </article>
           <article className="location-info-card">
             <div className="location-info-icon" aria-hidden="true">
-              {/* 좌표아이콘 추가 */}
+              <img src={mapsFlagsIcon} alt="" />
             </div>
             <h2>住所</h2>
             <p>

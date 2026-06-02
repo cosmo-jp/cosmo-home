@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react'
 import { Accordion, Container, Nav, Navbar } from 'react-bootstrap'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
-const navItems = [
+type NavItem = {
+  label: string
+  to?: string
+  children?: {
+    label: string
+    to: string
+  }[]
+}
+
+const navItems: NavItem[] = [
   {
     label: '회사소개',
     children: [
@@ -13,21 +22,15 @@ const navItems = [
   },
   {
     label: '솔루션',
-    to: '/solution',
     children: [
-      { label: '관리 시스템', to: '/solution' },
-      { label: '데이터 연동', to: '/solution' },
-      { label: '운영 자동화', to: '/solution' },
+      { label: 'e-ERP', to: '/solution/e-erp' },
+      { label: 'e-SCM', to: '/solution/e-scm' },
+      { label: 'e-Procurement', to: '/solution/e-procurement' },
+      { label: 'e-MarketPlace', to: '/solution/e-marketplace' },
     ],
   },
   {
     label: '서비스',
-    to: '/service',
-    children: [
-      { label: '웹 화면 개발', to: '/service' },
-      { label: '기능 개선', to: '/service' },
-      { label: '품질 확인', to: '/service' },
-    ],
   },
   {
     label: '상담문의',
@@ -38,23 +41,29 @@ const navItems = [
 
 function Header() {
   const location = useLocation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
-  const activeMenu = navItems.find(
-    (item) =>
-      item.children.length > 0 &&
-      (item.to === location.pathname ||
-        item.children.some((child) => child.to === location.pathname)),
-  )
 
   useEffect(() => {
+    setIsMobileMenuOpen(false)
     setHoveredMenu(null)
   }, [location.pathname])
 
   return (
     <header className="site-header-wrap">
-      <Navbar className="site-header" expand="lg">
+      <Navbar
+        className="site-header"
+        expand="lg"
+        expanded={isMobileMenuOpen}
+        onToggle={(expanded) => setIsMobileMenuOpen(expanded)}
+      >
         <Container fluid>
-          <Navbar.Brand as={NavLink} className="site-logo" to="/">
+          <Navbar.Brand
+            as={NavLink}
+            className="site-logo"
+            onClick={() => setIsMobileMenuOpen(false)}
+            to="/"
+          >
             <span className="site-logo-mark">C</span>
             <span className="site-logo-text">
               <strong>Cosmo</strong>
@@ -65,22 +74,24 @@ function Header() {
           <Navbar.Toggle aria-controls="site-navbar-nav" />
           <Navbar.Collapse id="site-navbar-nav">
             <Nav className="site-nav site-nav-desktop ms-auto">
-              {navItems.map((item) => (
-                <div
-                  className="site-nav-item"
-                  key={item.label}
-                  onMouseEnter={() => setHoveredMenu(item.label)}
-                  onMouseLeave={() => setHoveredMenu(null)}
-                >
-                  {item.to ? (
-                    <Nav.Link
-                      as={NavLink}
-                      className="site-nav-link"
-                      to={item.to}
-                    >
-                      {item.label}
-                    </Nav.Link>
-                  ) : (
+              {navItems.map((item) =>
+                item.to ? (
+                  <Nav.Link
+                    as={NavLink}
+                    className="site-nav-link"
+                    key={item.label}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    to={item.to}
+                  >
+                    {item.label}
+                  </Nav.Link>
+                ) : (
+                  <div
+                    className="site-nav-item"
+                    key={item.label}
+                    onMouseEnter={() => setHoveredMenu(item.label)}
+                    onMouseLeave={() => setHoveredMenu(null)}
+                  >
                     <button
                       className={`site-nav-link site-nav-button ${
                         hoveredMenu === item.label ? 'active' : ''
@@ -89,47 +100,47 @@ function Header() {
                     >
                       {item.label}
                     </button>
-                  )}
-                  {item.children.length > 0 && (
-                    <div
-                      className={`hover-submenu ${
-                        hoveredMenu === item.label ? 'open' : ''
-                      }`}
-                    >
-                      <ul className="submenu-link-list">
-                        {item.children.map((child) => (
-                          <li key={child.label}>
-                            <h3>
-                              <NavLink
-                                onClick={() => setHoveredMenu(null)}
-                                to={child.to}
-                              >
-                                {child.label}
-                              </NavLink>
-                            </h3>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ))}
+                    {item.children && item.children.length > 0 && (
+                      <div
+                        className={`hover-submenu ${
+                          hoveredMenu === item.label ? 'open' : ''
+                        }`}
+                      >
+                        <ul className="submenu-link-list">
+                          {item.children.map((child) => (
+                            <li key={child.label}>
+                              <h3>
+                                <NavLink
+                                  onClick={() => setHoveredMenu(null)}
+                                  to={child.to}
+                                >
+                                  {child.label}
+                                </NavLink>
+                              </h3>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ),
+              )}
             </Nav>
 
             <div className="site-mobile-menu">
-              <Accordion
-                defaultActiveKey={activeMenu?.to ?? activeMenu?.label}
-                flush
-              >
+              <Accordion flush>
                 {navItems.map((item) =>
-                  item.children.length > 0 ? (
-                    <Accordion.Item eventKey={item.to ?? item.label} key={item.label}>
+                  item.children && item.children.length > 0 ? (
+                    <Accordion.Item eventKey={item.label} key={item.label}>
                       <Accordion.Header>{item.label}</Accordion.Header>
                       <Accordion.Body>
                         <ul className="slide-menu-links">
                           {item.children.map((child) => (
                             <li key={child.label}>
-                              <Link to={child.to}>
+                              <Link
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                to={child.to}
+                              >
                                 <h2>{child.label}</h2>
                               </Link>
                             </li>
@@ -137,15 +148,16 @@ function Header() {
                         </ul>
                       </Accordion.Body>
                     </Accordion.Item>
-                  ) : (
+                  ) : item.to ? (
                     <NavLink
                       className="mobile-menu-contact"
                       key={item.label}
-                      to={item.to ?? '/'}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      to={item.to}
                     >
                       {item.label}
                     </NavLink>
-                  ),
+                  ) : null,
                 )}
               </Accordion>
             </div>

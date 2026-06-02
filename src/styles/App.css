@@ -93,7 +93,6 @@
 .site-nav-button {
   border: 0;
   background: transparent;
-  cursor: default;
 }
 
 .site-nav-link:hover,
@@ -121,8 +120,7 @@
     transform 0.2s;
 }
 
-.hover-submenu.open,
-.site-nav-item:focus-within .hover-submenu {
+.hover-submenu.open {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
@@ -152,7 +150,7 @@
 }
 
 .submenu-link-list li h3,
-.slide-menu-links h3 {
+.slide-menu-links h2 {
   margin: 0;
   font-size: 16px;
   font-weight: 700;
@@ -224,12 +222,9 @@
   line-height: 1.7;
 }
 
-.site-footer {
-  padding: 24px 48px;
-  border-top: 1px solid var(--border);
-  color: var(--text);
-  font-size: 14px;
-  text-align: center;
+.banner-message {
+  background: #ccffff80;
+  margin-bottom: 48px;
 }
 
 @media (max-width: 991.98px) {
@@ -248,16 +243,12 @@
     display: block;
     width: 100%;
     padding-top: 12px;
-  }
-
-  .site-mobile-menu .accordion {
     border-top: 1px solid var(--border);
   }
 
   .site-mobile-menu .accordion-item {
     border: 0;
     border-bottom: 1px solid var(--border);
-    background: #ffffff;
   }
 
   .site-mobile-menu .accordion-button {
@@ -282,27 +273,15 @@
     overflow-y: auto;
   }
 
-  .slide-menu-links {
-    justify-content: flex-start;
-  }
-
-  .mobile-menu-overview,
   .mobile-menu-contact {
     display: flex;
     align-items: center;
     min-height: 54px;
+    border-bottom: 1px solid var(--border);
     color: var(--text-h);
     font-size: 15px;
     font-weight: 700;
     text-decoration: none;
-  }
-
-  .mobile-menu-overview {
-    margin-bottom: 12px;
-  }
-
-  .mobile-menu-contact {
-    border-bottom: 1px solid var(--border);
   }
 
   .mobile-menu-contact.active {
@@ -318,11 +297,18 @@
     padding: 48px 20px;
   }
 
+  .banner-message {
+    text-align: center;
+  }
+
+  .banner-message h1 {
+    font-size: clamp(22px, 6vw, 32px);
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
   .feature-grid {
     grid-template-columns: 1fr;
   }
 
-  .site-footer {
-    padding: 20px;
-  }
 }

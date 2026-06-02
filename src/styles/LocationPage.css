@@ -69,8 +69,14 @@
 .location-info-icon {
   margin-bottom: 12px;
   color: #333333;
-  font-size: 48px;
   line-height: 1;
+}
+
+.location-info-icon img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .location-info-card h2 {
