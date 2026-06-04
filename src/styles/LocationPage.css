@@ -1,10 +1,38 @@
 .location-page {
   flex: 1;
+  margin-bottom: 40px;
 }
 
 .location-map-section {
   padding: 0 88px;
   background: #ffffff;
+}
+
+.location-description {
+  margin: 0 0 24px;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.location-description strong {
+  font-weight: 800;
+}
+
+.line-yurakucho {
+  color: #c1a470;
+  font-weight: 800;
+}
+
+.line-hibiya {
+  color: #b5b5ac;
+  font-weight: 800;
+}
+
+.line-oedo {
+  color: #b6007a;
+  font-weight: 800;
 }
 
 .map-panel {

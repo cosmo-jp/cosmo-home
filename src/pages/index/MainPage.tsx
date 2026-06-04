@@ -1,5 +1,4 @@
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
 import { increment } from '../../features/counter/counterSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import '../../styles/MainPage.css'
@@ -22,7 +21,6 @@ const features = [
 function MainPage() {
   const count = useAppSelector((state) => state.counter.value)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   return (
     <main className="main-page">
@@ -37,9 +35,6 @@ function MainPage() {
                 state ready for feature development.
               </p>
               <div className="hero-actions">
-                <Button onClick={() => navigate('/service')} variant="dark">
-                  서비스 보기
-                </Button>
                 <Button
                   type="button"
                   onClick={() => dispatch(increment())}

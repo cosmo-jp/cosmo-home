@@ -11,6 +11,9 @@ function MessagePage() {
       </section>
       <section className="message-section">
         <Container className="message-info" fluid>
+          <p className="page-title">
+            メッセージ
+          </p>
           <div className="message-layout">
             <article className="message-thumnail message-visual">
               

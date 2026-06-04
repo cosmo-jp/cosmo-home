@@ -5,12 +5,7 @@ function ContactPage() {
     <main className="sub-page">
       <section className="sub-hero">
         <Container fluid>
-          <p className="eyebrow">Contact</p>
-          <h1>상담문의</h1>
-          <p>
-            프로젝트 상담, 서비스 도입, 기능 개선과 관련된 문의를 남겨주세요.
-            필요한 내용을 확인한 뒤 빠르게 안내드리겠습니다.
-          </p>
+          <h1>お問い合わせ</h1>
         </Container>
       </section>
 

@@ -1,23 +1,24 @@
-import { Container } from 'react-bootstrap'
+import escmImage from '../../assets/solution/e-SCM.png'
+import SolutionImage from './SolutionImage'
 
 function EscmPage() {
   return (
-    <main className="sub-page">
-      <section className="sub-hero banner-message">
-        <Container fluid>
-          <h1>e-SCM</h1>
-        </Container>
-      </section>
-      <section className="content-section">
-        <Container fluid>
-          <h2>e-SCM</h2>
-          <p>
-            공급망 전반의 정보 흐름을 연결하여 재고, 물류, 납기 관리를
-            체계적으로 운영할 수 있도록 지원합니다.
-          </p>
-        </Container>
-      </section>
-    </main>
+    <article className="solution-content">
+      <p className="solution-intro-main">
+        e-SCM
+      </p>
+      <p className="solution-intro-sub">
+        Supply Chain Management
+      </p>
+      <p className="solution-description">
+        SCMの一番基本的な思想の情報を適時に提供してその情報を SCMに参加するすべての取り引き担当者らが共有するのと<br/>
+        供給網全体の担当者らが共同に計画して実践することで SCMの效果と利益はすべての部分で得られることができます。<br/>
+        SCMは再考減少、業務手続きの簡素化、業務処理の時間短縮などの效果を得ることができます。
+      </p>
+      <div className="solution-image-wrap">
+        <SolutionImage src={escmImage} alt="e-SCM SYSTEM" />
+      </div>
+    </article>
   )
 }
 

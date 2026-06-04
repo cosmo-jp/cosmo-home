@@ -10,11 +10,22 @@ function LocationPage() {
     <main className="sub-page location-page">
       <section className="sub-hero banner-message">
         <Container fluid>
-          <h1>오시는길</h1>
+          <h1>アクセス</h1>
         </Container>
       </section>
 
       <section className="location-map-section">
+        <p className="page-title">
+          アクセス
+        </p>
+        <p className="location-description">
+          <span className="line-hibiya">日比谷線</span>「
+          <strong>築地駅</strong>」より徒歩6分、
+          <span className="line-yurakucho">有楽町線</span>「
+          <strong>新富町駅</strong>」より徒歩7分、
+          <span className="line-oedo">大江戸線</span>「
+          <strong>月島駅</strong>」より徒歩10分
+        </p>
         <div className="map-panel">
           <GoogleMap />
         </div>

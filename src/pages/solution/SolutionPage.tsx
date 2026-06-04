@@ -1,49 +1,90 @@
-import { Card, Col, Container, Row } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
+import { Container, Tab, Tabs } from 'react-bootstrap'
+import { useLocation, useNavigate } from 'react-router-dom'
+import EerpPage from './EerpPage'
+import EmarketplacePage from './EmarketplacePage'
+import EprocurementPage from './EprocurementPage'
+import EscmPage from './EscmPage'
+import '../../styles/SolutionPage.css'
 
-const solutionItems = [
+type SolutionTab = {
+  id: string
+  label: string
+  path: string
+  content: ReactNode
+}
+
+const solutionTabs: SolutionTab[] = [
   {
-    title: '관리 시스템',
-    description: '직원, 근태, 문서, 신청 업무를 한 곳에서 관리할 수 있습니다.',
+    id: 'e-erp',
+    label: 'e-ERP',
+    path: '/solution/e-erp',
+    content: <EerpPage />,
   },
   {
-    title: '데이터 연동',
-    description: 'API 기반 연동으로 내부 시스템과 외부 서비스를 연결합니다.',
+    id: 'e-scm',
+    label: 'e-SCM',
+    path: '/solution/e-scm',
+    content: <EscmPage />,
   },
   {
-    title: '운영 자동화',
-    description: '반복 작업을 줄이고 승인, 알림, 리포트 흐름을 자동화합니다.',
+    id: 'e-procurement',
+    label: 'e-Procurement',
+    path: '/solution/e-procurement',
+    content: <EprocurementPage />,
+  },
+  {
+    id: 'e-marketplace',
+    label: 'e-MarketPlace',
+    path: '/solution/e-marketplace',
+    content: <EmarketplacePage />,
   },
 ]
 
 function SolutionPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const currentTab =
+    solutionTabs.find((tab) => tab.path === location.pathname) ??
+    solutionTabs[0]
+  const [selectedTabId, setSelectedTabId] = useState(currentTab.id)
+
+  useEffect(() => {
+    setSelectedTabId(currentTab.id)
+  }, [currentTab.id])
+
+  const selectedTab =
+    solutionTabs.find((tab) => tab.id === selectedTabId) ?? solutionTabs[0]
+
   return (
     <main className="sub-page">
-      <section className="sub-hero">
+      <section className="sub-hero banner-message">
         <Container fluid>
-          <p className="eyebrow">Solution</p>
-          <h1>솔루션</h1>
-          <p>
-            업무 흐름을 단순화하고 운영 효율을 높일 수 있는 맞춤형 웹 솔루션을
-            제공합니다.
-          </p>
+          <h1>{selectedTab.label}</h1>
         </Container>
       </section>
+      <section className="solution-section">
+        <Tabs
+          activeKey={selectedTabId}
+          className="solution-tab-list"
+          onSelect={(key) => {
+            const nextTab = solutionTabs.find((tab) => tab.id === key)
 
-      <section className="content-section">
-        <Container fluid>
-          <Row className="g-4">
-            {solutionItems.map((item) => (
-              <Col key={item.title} md={4}>
-                <Card className="feature-card h-100">
-                  <Card.Body>
-                    <Card.Title as="h3">{item.title}</Card.Title>
-                    <Card.Text>{item.description}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Container>
+            if (nextTab) {
+              setSelectedTabId(nextTab.id)
+              navigate(nextTab.path)
+            }
+          }}
+        >
+          {solutionTabs.map((tab) => (
+            <Tab eventKey={tab.id} key={tab.id} title={tab.label}>
+              <Container className="solution-content-container" fluid>
+                {tab.content}
+              </Container>
+            </Tab>
+          ))}
+        </Tabs>
       </section>
     </main>
   )

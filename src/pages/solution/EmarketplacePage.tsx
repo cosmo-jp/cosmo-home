@@ -1,23 +1,21 @@
-import { Container } from 'react-bootstrap'
+import emarketplaceImage from '../../assets/solution/e-MarketPlace.png'
+import SolutionImage from './SolutionImage'
 
 function EmarketplacePage() {
   return (
-    <main className="sub-page">
-      <section className="sub-hero banner-message">
-        <Container fluid>
-          <h1>e-MarketPlace</h1>
-        </Container>
-      </section>
-      <section className="content-section">
-        <Container fluid>
-          <h2>e-MarketPlace</h2>
-          <p>
-            기업 간 거래와 상품 정보를 온라인에서 관리하고, 주문과 계약 흐름을
-            효율적으로 연결하는 마켓플레이스 솔루션입니다.
-          </p>
-        </Container>
-      </section>
-    </main>
+    <article className="solution-content">
+      <p className="solution-intro-main">
+          e-MarketPlace
+      </p>
+      <p className="solution-description">
+        e-MarketPlaceSystemは Web基盤の公開購買システムで、インターネット上で簡単に調達業務が出来ます。<br/>
+        また、合理的な購買価額で企業の調達費用を節減し、全社的資源管理(ERP)システムとの連係により<br/>
+        購買リードタイムの短縮を実現し、業務生産性を極大化するように支援します。
+      </p>
+      <div className="solution-image-wrap">
+        <SolutionImage src={emarketplaceImage} alt="e-MarketPlace SYSTEM" />
+      </div>
+    </article>
   )
 }
 

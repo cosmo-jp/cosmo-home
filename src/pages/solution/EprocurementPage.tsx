@@ -1,23 +1,22 @@
-import { Container } from 'react-bootstrap'
+import eprocurementImage from '../../assets/solution/e-Procurement.png'
+import SolutionImage from './SolutionImage'
 
 function EprocurementPage() {
   return (
-    <main className="sub-page">
-      <section className="sub-hero banner-message">
-        <Container fluid>
-          <h1>e-Procurement</h1>
-        </Container>
-      </section>
-      <section className="content-section">
-        <Container fluid>
-          <h2>e-Procurement</h2>
-          <p>
-            구매 요청부터 승인, 발주, 정산까지의 조달 업무를 온라인으로
-            표준화하여 업무 속도와 투명성을 높입니다.
-          </p>
-        </Container>
-      </section>
-    </main>
+    <article className="solution-content">
+      <p className="solution-intro-main">
+          e-Procurement SYSTEM
+      </p>
+      <p className="solution-description">
+        e-ProcurementSystemは Web基盤の母企業協業化システムで、インターネット上で調達業務が出来ます。<br/>
+        これにより調達費用を節減し、ERPとの連係により購買リードタイム短縮を実現して業務生産性を極大化出来ます。<br/>
+        e-ProcurementSystemは Bidding部門と e-Purchasing部門を独立的に運営することが出来ます。<br/>
+        この機能により顧客の管理水準と目的に合致する運用が出来ます。<br/>
+      </p>
+      <div className="solution-image-wrap">
+        <SolutionImage src={eprocurementImage} alt="e-Procurement SYSTEM" />
+      </div>
+    </article>
   )
 }
 

@@ -1,23 +1,23 @@
-import { Container } from 'react-bootstrap'
+import eerpImage from '../../assets/solution/e-ERP.png'
+import SolutionImage from './SolutionImage'
 
 function EerpPage() {
   return (
-    <main className="sub-page">
-      <section className="sub-hero banner-message">
-        <Container fluid>
-          <h1>e-ERP</h1>
-        </Container>
-      </section>
-      <section className="content-section">
-        <Container fluid>
-          <h2>e-ERP</h2>
-          <p>
-            기업의 인사, 회계, 구매, 영업 등 주요 업무 데이터를 통합하여
-            효율적인 경영 관리를 지원하는 솔루션입니다.
-          </p>
-        </Container>
-      </section>
-    </main>
+    <article className="solution-content">
+      <p className="solution-intro-main">
+        e-ERP
+      </p>
+      <p className="solution-intro-sub">
+        Enterprise Resource Planning
+      </p>
+      <p className="solution-description">
+        企業用 e-Enterprise ソリューションで、 APICS （アメリカ生産及び在庫管理協会）標準基盤をベースにした改良形<br/>
+        システムであり、流通及び製造関連業に最適化されています。
+      </p>
+      <div className="solution-image-wrap">
+        <SolutionImage src={eerpImage} alt="e-ERP SYSTEM" />
+      </div>
+    </article>
   )
 }
 

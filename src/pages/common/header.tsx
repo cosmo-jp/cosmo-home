@@ -1,53 +1,106 @@
 import { useEffect, useState } from 'react'
-import { Accordion, Container, Nav, Navbar } from 'react-bootstrap'
+import { Accordion, Container, Dropdown, Nav, Navbar } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
 type NavItem = {
-  label: string
+  id: string
+  labelKey: string
   to?: string
   children?: {
-    label: string
+    id: string
+    labelKey: string
     to: string
   }[]
 }
 
 const navItems: NavItem[] = [
   {
-    label: '회사소개',
+    id: 'about',
+    labelKey: 'nav.about',
     children: [
-      { label: '메세지', to: '/company/message' },
-      { label: '회사개요', to: '/company/overview' },
-      { label: '오시는길', to: '/company/location' },
+      { id: 'message', labelKey: 'nav.message', to: '/company/message' },
+      { id: 'overview', labelKey: 'nav.overview', to: '/company/overview' },
+      { id: 'location', labelKey: 'nav.location', to: '/company/location' },
     ],
   },
   {
-    label: '솔루션',
+    id: 'solution',
+    labelKey: 'nav.solution',
     children: [
-      { label: 'e-ERP', to: '/solution/e-erp' },
-      { label: 'e-SCM', to: '/solution/e-scm' },
-      { label: 'e-Procurement', to: '/solution/e-procurement' },
-      { label: 'e-MarketPlace', to: '/solution/e-marketplace' },
+      { id: 'e-erp', labelKey: 'e-ERP', to: '/solution/e-erp' },
+      { id: 'e-scm', labelKey: 'e-SCM', to: '/solution/e-scm' },
+      {
+        id: 'e-procurement',
+        labelKey: 'e-Procurement',
+        to: '/solution/e-procurement',
+      },
+      {
+        id: 'e-marketplace',
+        labelKey: 'e-MarketPlace',
+        to: '/solution/e-marketplace',
+      },
     ],
   },
   {
-    label: '서비스',
+    id: 'recruit',
+    labelKey: 'nav.recruit',
+    to: '/recruit',
   },
   {
-    label: '상담문의',
+    id: 'contact',
+    labelKey: 'nav.contact',
     to: '/contact',
     children: [],
   },
 ]
 
+const languageOptions = [
+  { code: 'ja', flag: '🇯🇵', labelKey: 'language.ja' },
+  { code: 'ko', flag: '🇰🇷', labelKey: 'language.ko' },
+]
+
 function Header() {
   const location = useLocation()
+  const { i18n, t } = useTranslation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
+  const currentLanguage =
+    languageOptions.find((language) => language.code === i18n.language) ??
+    languageOptions[0]
 
   useEffect(() => {
     setIsMobileMenuOpen(false)
     setHoveredMenu(null)
   }, [location.pathname])
+
+  const handleLanguageChange = (languageCode: string) => {
+    i18n.changeLanguage(languageCode)
+  }
+
+  const languageDropdown = (
+    <Dropdown align="end" className="language-dropdown">
+      <Dropdown.Toggle
+        aria-label={t('common.language')}
+        className="language-dropdown-toggle"
+        variant="light"
+      >
+        <span aria-hidden="true">{currentLanguage.flag}</span>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {languageOptions.map((language) => (
+          <Dropdown.Item
+            active={i18n.language === language.code}
+            key={language.code}
+            onClick={() => handleLanguageChange(language.code)}
+          >
+            <span aria-hidden="true">{language.flag}</span>
+            <span>{t(language.labelKey)}</span>
+          </Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+  )
 
   return (
     <header className="site-header-wrap">
@@ -79,42 +132,44 @@ function Header() {
                   <Nav.Link
                     as={NavLink}
                     className="site-nav-link"
-                    key={item.label}
+                    key={item.id}
                     onClick={() => setIsMobileMenuOpen(false)}
                     to={item.to}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </Nav.Link>
                 ) : (
                   <div
                     className="site-nav-item"
-                    key={item.label}
-                    onMouseEnter={() => setHoveredMenu(item.label)}
+                    key={item.id}
+                    onMouseEnter={() => setHoveredMenu(item.id)}
                     onMouseLeave={() => setHoveredMenu(null)}
                   >
                     <button
                       className={`site-nav-link site-nav-button ${
-                        hoveredMenu === item.label ? 'active' : ''
+                        hoveredMenu === item.id ? 'active' : ''
                       }`}
                       type="button"
                     >
-                      {item.label}
+                      {t(item.labelKey)}
                     </button>
                     {item.children && item.children.length > 0 && (
                       <div
                         className={`hover-submenu ${
-                          hoveredMenu === item.label ? 'open' : ''
+                          hoveredMenu === item.id ? 'open' : ''
                         }`}
                       >
                         <ul className="submenu-link-list">
                           {item.children.map((child) => (
-                            <li key={child.label}>
+                            <li key={child.id}>
                               <h3>
                                 <NavLink
                                   onClick={() => setHoveredMenu(null)}
                                   to={child.to}
                                 >
-                                  {child.label}
+                                  {child.labelKey.startsWith('nav.')
+                                    ? t(child.labelKey)
+                                    : child.labelKey}
                                 </NavLink>
                               </h3>
                             </li>
@@ -125,23 +180,28 @@ function Header() {
                   </div>
                 ),
               )}
+              {languageDropdown}
             </Nav>
 
             <div className="site-mobile-menu">
               <Accordion flush>
                 {navItems.map((item) =>
                   item.children && item.children.length > 0 ? (
-                    <Accordion.Item eventKey={item.label} key={item.label}>
-                      <Accordion.Header>{item.label}</Accordion.Header>
+                    <Accordion.Item eventKey={item.id} key={item.id}>
+                      <Accordion.Header>{t(item.labelKey)}</Accordion.Header>
                       <Accordion.Body>
                         <ul className="slide-menu-links">
                           {item.children.map((child) => (
-                            <li key={child.label}>
+                            <li key={child.id}>
                               <Link
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 to={child.to}
                               >
-                                <h2>{child.label}</h2>
+                                <h2>
+                                  {child.labelKey.startsWith('nav.')
+                                    ? t(child.labelKey)
+                                    : child.labelKey}
+                                </h2>
                               </Link>
                             </li>
                           ))}
@@ -151,15 +211,16 @@ function Header() {
                   ) : item.to ? (
                     <NavLink
                       className="mobile-menu-contact"
-                      key={item.label}
+                      key={item.id}
                       onClick={() => setIsMobileMenuOpen(false)}
                       to={item.to}
                     >
-                      {item.label}
+                      {t(item.labelKey)}
                     </NavLink>
                   ) : null,
                 )}
               </Accordion>
+              <div className="mobile-language-dropdown">{languageDropdown}</div>
             </div>
           </Navbar.Collapse>
         </Container>
