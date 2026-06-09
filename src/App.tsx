@@ -20,6 +20,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/cosmo-home" element={<MainPage />} />
           <Route path="/company/message" element={<MessagePage />} />
           <Route path="/company/overview" element={<OverviewPage />} />
           <Route path="/company/location" element={<LocationPage />} />
