@@ -231,7 +231,7 @@ function Header() {
                   ) : null,
                 )}
               </Accordion>
-              <div className="mobile-language-dropdown">{languageDropdown}</div>
+              {/* <div className="mobile-language-dropdown">{languageDropdown}</div> */}
             </div>
           </Navbar.Collapse>
         </Container>

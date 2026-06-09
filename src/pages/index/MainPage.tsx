@@ -1,47 +1,64 @@
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import { increment } from '../../features/counter/counterSlice'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { Col, Container, Row } from 'react-bootstrap'
+import erpBanner from '../../assets/banner/erp_banner.png'
+import homepageBanner from '../../assets/banner/homepage_banner.png'
+import marketBanner from '../../assets/banner/market_banner.png'
+import procureBanner from '../../assets/banner/procure_banner.png'
+import scmBanner from '../../assets/banner/scm_banner.png'
+import shoppingmallBanner from '../../assets/banner/shoppingmall_banner.png'
+import SolutionCard from '../../components/SolutionCard'
 import '../../styles/MainPage.css'
 
 const features = [
   {
-    title: 'Common layout',
-    description: 'Header and footer are separated into reusable components.',
+    title: 'e-ERP',
+    description: '企業活動に必要な基幹業務を統合し、経営情報を一元管理します。',
+    image: erpBanner,
+    path: '/solution/e-erp',
   },
   {
-    title: 'Main page',
-    description: 'The index page owns the visible home screen content.',
+    title: 'e-SCM',
+    description: '受発注から在庫、物流までサプライチェーン全体を効率化します。',
+    image: scmBanner,
+    path: '/solution/e-scm',
   },
   {
-    title: 'Redux ready',
-    description: 'The page uses the shared store through typed hooks.',
+    title: 'e-Procurement',
+    description: '購買業務の電子化により、調達プロセスの最適化を支援します。',
+    image: procureBanner,
+    path: '/solution/e-procurement',
+  },
+  {
+    title: 'e-MarketPlace',
+    description: '企業間取引を支える電子市場と多様な商取引機能を提供します。',
+    image: marketBanner,
+    path: '/solution/e-marketplace',
+  },
+  {
+    title: 'e-shoppingMallWizard',
+    description: '高機能なショッピングモールを効率よく構築、運営できます。',
+    image: shoppingmallBanner,
+    path: '/solution/e-shoppingmall-wizard',
+  },
+  {
+    title: 'e-HomePageWizard',
+    description: '専門知識がなくても企業ホームページを簡単に作成、更新できます。',
+    image: homepageBanner,
+    path: '/solution/e-homepage-wizard',
   },
 ]
 
 function MainPage() {
-  const count = useAppSelector((state) => state.counter.value)
-  const dispatch = useAppDispatch()
-
   return (
     <main className="main-page">
       <section className="hero-section" id="about">
         <Container fluid>
           <Row className="align-items-center">
             <Col lg={8}>
-              <p className="eyebrow">React starter project</p>
-              <h1>Cosmo Home</h1>
-              <p className="hero-description">
-                A clean base screen with shared layout components and Redux
-                state ready for feature development.
-              </p>
-              <div className="hero-actions">
-                <Button
-                  type="button"
-                  onClick={() => dispatch(increment())}
-                  variant="outline-dark"
-                >
-                  Redux count: {count}
-                </Button>
+              <h1>コスモコンサルティング</h1>
+              <div className="hero-description">
+                <p>COSMO GLOBAL SYSTEMS は B2B（Business to　Business）、</p>
+                <p>B2C（Business to Customers）、G2B（Government to Business）の為の</p>
+                <p>Business Portal Site　を運営し、e-business 構築の為の Solution 提供及び　consulting から管理までを一括受注開発します。</p>
               </div>
             </Col>
           </Row>
@@ -51,28 +68,15 @@ function MainPage() {
       <section className="content-section" id="services">
         <Container fluid>
           <div className="section-heading">
-            <p className="eyebrow">Services</p>
-            <h2>Basic page structure</h2>
+            <p className="eyebrow section-title">IT ソリューション</p>
           </div>
-          <Row className="g-4">
+          <Row className="solution-feature-grid g-4">
             {features.map((feature) => (
               <Col key={feature.title} md={4}>
-                <Card className="feature-card h-100">
-                  <Card.Body>
-                    <Card.Title as="h3">{feature.title}</Card.Title>
-                    <Card.Text>{feature.description}</Card.Text>
-                  </Card.Body>
-                </Card>
+                <SolutionCard {...feature} />
               </Col>
             ))}
           </Row>
-        </Container>
-      </section>
-
-      <section className="contact-section" id="contact">
-        <Container fluid>
-          <h2>Ready to build</h2>
-          <p>Use this page as the starting point for the next screen.</p>
         </Container>
       </section>
     </main>
