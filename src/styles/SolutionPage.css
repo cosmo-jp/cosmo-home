@@ -1,3 +1,44 @@
+.banner-message.erp-banner {
+  background: url('../assets/banner/erp_banner.png') center / cover no-repeat;
+}
+
+.banner-message.scm-banner {
+  background: url('../assets/banner/scm_banner.png') center / cover no-repeat;
+}
+
+.banner-message.procure-banner {
+  background: url('../assets/banner/procure_banner.png') center / cover no-repeat;
+}
+
+.banner-message.market-banner {
+  background: url('../assets/banner/market_banner.png') center / cover no-repeat;
+}
+
+.banner-message.shoppingmall-banner {
+  background: url('../assets/banner/shoppingmall_banner.png') center / cover no-repeat;
+}
+
+.banner-message.homepage-banner {
+  background: url('../assets/banner/homepage_banner.png') center / cover no-repeat;
+}
+
+.erp-banner h1,
+.scm-banner h1,
+.procure-banner h1,
+.market-banner h1,
+.shoppingmall-banner h1,
+.homepage-banner h1 {
+  color: #001d56;
+}
+
+.procure-banner h1 {
+  color: #ffffff;
+}
+
+.shoppingmall-banner h1 {
+  color: #d9d9d9;
+}
+
 .solution-section {
   padding: 0 0 80px;
   background: #ffffff;
@@ -70,6 +111,81 @@
   border-bottom: 1px solid var(--border);
   font-size: 20px;
   line-height: 1.8;
+}
+
+.shoppingmall-description-title {
+  color: #2563eb;
+  font-weight: 800;
+}
+
+.shoppingmall-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 48px;
+  align-items: start;
+  margin-top: 25px;
+  padding-bottom: 38px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.shoppingmall-copy {
+  color: #111111;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.shoppingmall-copy p {
+  margin: 0 0 10px;
+}
+
+.shoppingmall-lead span {
+  color: #001dff;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+.shoppingmall-cart-image {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+}
+
+.shoppingmall-point {
+  padding-top: 32px;
+  text-align: left;
+}
+
+.shoppingmall-point h3 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  margin: 0 0 10px;
+  padding: 3px 18px 4px;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  color: #ffffff;
+  background: #e60012;
+  box-shadow: 0 0 0 2px #e60012;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.shoppingmall-point ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+  list-style: none;
 }
 
 .solution-image-wrap {
@@ -178,6 +294,16 @@
 
   .solution-description {
     font-size: clamp(14px, 4vw, 18px);
+  }
+
+  .shoppingmall-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .shoppingmall-cart-image {
+    max-width: min(320px, 100%);
+    margin: 0 auto;
   }
 
   .solution-image-button {

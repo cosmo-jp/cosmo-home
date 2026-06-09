@@ -4,7 +4,7 @@ import '../../styles/MessagePage.css'
 function MessagePage() {
   return (
     <main className="sub-page">
-      <section className="sub-hero banner-message">
+      <section className="sub-hero banner-message message-banner">
         <Container fluid>
           <h1>メッセージ</h1>
         </Container>
@@ -15,9 +15,6 @@ function MessagePage() {
             メッセージ
           </p>
           <div className="message-layout">
-            <article className="message-thumnail message-visual">
-              
-            </article>
             <article className="message-card">
               <p className="message-company">
                 コスモコンサルティング株式会社

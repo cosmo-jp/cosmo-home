@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import pmarkImage from '../../assets/security/Pmark85_JP.gif'
+import PrivacyMarkLink from '../../components/PrivacyMarkLink'
 import '../../styles/Footer.css'
 
 function Footer() {
@@ -27,14 +27,10 @@ function Footer() {
             </nav>
           </div>
         </div>
-        <a
-          className="site-footer-mark-link"
-          href="https://privacymark.jp/"
-          rel="noreferrer"
-          target="_blank"
-        >
-          <img className="site-footer-mark" src={pmarkImage} alt="Pマーク" />
-        </a>
+        <PrivacyMarkLink
+          linkClassName="site-footer-mark-link"
+          imageClassName="site-footer-mark"
+        />
       </Container>
     </footer>
   )

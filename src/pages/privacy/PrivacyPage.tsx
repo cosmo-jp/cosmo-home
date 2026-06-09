@@ -24,7 +24,7 @@ function PrivacyPage() {
 
   return (
     <main className="sub-page">
-      <section className="sub-hero banner-message">
+      <section className="sub-hero banner-message privacy-banner">
         <Container fluid>
           <h1>{selectedTab.label}</h1>
         </Container>

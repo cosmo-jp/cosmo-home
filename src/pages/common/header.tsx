@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Accordion, Container, Dropdown, Nav, Navbar } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import '../../styles/HeaderSubmenu.css'
 
 type NavItem = {
   id: string
@@ -39,6 +40,16 @@ const navItems: NavItem[] = [
         id: 'e-marketplace',
         labelKey: 'e-MarketPlace',
         to: '/solution/e-marketplace',
+      },
+      {
+        id: 'e-shoppingmall-wizard',
+        labelKey: 'e-shoppingMallWizard',
+        to: '/solution/e-shoppingmall-wizard',
+      },
+      {
+        id: 'e-homepage-wizard',
+        labelKey: 'e-HomePageWizard',
+        to: '/solution/e-homepage-wizard',
       },
     ],
   },
@@ -155,7 +166,7 @@ function Header() {
                     </button>
                     {item.children && item.children.length > 0 && (
                       <div
-                        className={`hover-submenu ${
+                        className={`hover-submenu hover-submenu-${item.id} ${
                           hoveredMenu === item.id ? 'open' : ''
                         }`}
                       >
@@ -180,7 +191,7 @@ function Header() {
                   </div>
                 ),
               )}
-              {languageDropdown}
+              {/* {languageDropdown} */}
             </Nav>
 
             <div className="site-mobile-menu">

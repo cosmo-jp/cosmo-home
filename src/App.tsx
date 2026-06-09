@@ -28,6 +28,8 @@ function App() {
           <Route path="/solution/e-scm" element={<SolutionPage />} />
           <Route path="/solution/e-procurement" element={<SolutionPage />} />
           <Route path="/solution/e-marketplace" element={<SolutionPage />} />
+          <Route path="/solution/e-shoppingmall-wizard" element={<SolutionPage />} />
+          <Route path="/solution/e-homepage-wizard" element={<SolutionPage />} />
           <Route path="/recruit" element={<RecruitPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />

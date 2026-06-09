@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap"
-import pmarkImage from '../../assets/security/Pmark85_JP.gif'
+import PrivacyMarkLink from '../../components/PrivacyMarkLink'
 
 function PrivacyPolicyContent() {
   return (
@@ -36,12 +36,10 @@ function PrivacyPolicyContent() {
               連絡先：０３－５８３５－３７７１
             </p>
             <p className="p-mark">
-              <a className="site-footer-mark-link"
-                href="https://privacymark.jp/"
-                rel="noreferrer"
-                target="_blank">
-                <img className="site-footer-mark" src={pmarkImage} alt="Pマーク" />
-              </a>
+              <PrivacyMarkLink
+                linkClassName="site-footer-mark-link"
+                imageClassName="site-footer-mark"
+              />
             </p>
           </div>
       </article>

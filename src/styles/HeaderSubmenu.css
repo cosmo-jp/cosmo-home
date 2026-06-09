@@ -1,0 +1,10 @@
+.hover-submenu-about {
+  width: 200px;
+  min-width: 0;
+  max-width: none;
+  height: 200px;
+}
+
+.hover-submenu-solution {
+  height: 260px;
+}

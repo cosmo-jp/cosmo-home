@@ -8,7 +8,7 @@ import '../../styles/LocationPage.css'
 function LocationPage() {
   return (
     <main className="sub-page location-page">
-      <section className="sub-hero banner-message">
+      <section className="sub-hero banner-message location-banner">
         <Container fluid>
           <h1>アクセス</h1>
         </Container>

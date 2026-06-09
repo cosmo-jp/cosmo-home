@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap'
-import '../../styles/OverviewPage.css'
+import '../../styles/RecruitPage.css'
 
 const recruitItems = [
   ['募集時期', '随時採用'],
@@ -24,17 +24,17 @@ function renderLineBreaks(text: string) {
 function RecruitPage() {
   return (
     <main className="sub-page">
-      <section className="sub-hero banner-message">
+      <section className="sub-hero banner-message recruit-banner">
         <Container fluid>
           <h1>採用情報</h1>
         </Container>
       </section>
-      <section className="overview-section">
-        <Container className="overview-container" fluid>
+      <section className="recruit-section">
+        <Container className="recruit-container" fluid>
           <p className="page-title">採用情報</p>
-          <dl className="overview-list">
+          <dl className="recruit-list">
             {recruitItems.map(([title, description]) => (
-              <div className="overview-row" key={title}>
+              <div className="recruit-row" key={title}>
                 <dt>{title}</dt>
                 <dd>{renderLineBreaks(description)}</dd>
               </div>

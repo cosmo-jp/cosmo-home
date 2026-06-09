@@ -72,6 +72,14 @@ const COMPANY_POSITION: LatLngLiteral = {
   lng: 139.7780309,
 }
 
+const COMPANY_INFO = {
+  name: 'コスモコンサルティング株式会社',
+  address: '東京都中央区明石町8-1　聖路加タワー34F',
+}
+
+const GOOGLE_MAP_URL =
+  `https://www.google.com/maps/dir/?api=1&destination=${COMPANY_POSITION.lat},${COMPANY_POSITION.lng}&travelmode=walking`
+
 const GOOGLE_ROUTE_BLUE = '#4285f4'
 
 const ROUTE_ORIGINS = [
@@ -150,21 +158,21 @@ function GoogleMap() {
           center: COMPANY_POSITION,
           zoom: 16,
           mapTypeControl: false,
-          fullscreenControl: true,
+          fullscreenControl: false,
           streetViewControl: false,
         })
 
         const marker = new google.maps.Marker({
           position: COMPANY_POSITION,
           map,
-          title: 'コスモコンサルティング株式会社',
+          title: COMPANY_INFO.name,
         })
 
         const infoWindow = new google.maps.InfoWindow({
           content: `
             <div class="map-info-window">
-              <strong>コスモコンサルティング株式会社</strong>
-              <p>東京都中央区明石町8-1　聖路加タワー34F</p>
+              <strong>${COMPANY_INFO.name}</strong>
+              <p>${COMPANY_INFO.address}</p>
             </div>
           `,
         })
@@ -216,8 +224,22 @@ function GoogleMap() {
   }, [])
 
   return (
-    <div className="google-map" ref={mapRef}>
-      {message && <p className="google-map-empty">{message}</p>}
+    <div className="google-map-frame">
+      <div className="google-map" ref={mapRef}>
+        {message && <p className="google-map-empty">{message}</p>}
+      </div>
+      <div className="google-map-location-info">
+        <strong>{COMPANY_INFO.name}</strong>
+        <p>{COMPANY_INFO.address}</p>
+        <a
+          className="google-map-link"
+          href={GOOGLE_MAP_URL}
+          rel="noreferrer"
+          target="_blank"
+        >
+          Googleマップで見る
+        </a>
+      </div>
     </div>
   )
 }

@@ -3,15 +3,18 @@ import type { ReactNode } from 'react'
 import { Container, Tab, Tabs } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import EerpPage from './EerpPage'
+import EhomePageWizardPage from './EhomePageWizardPage'
 import EmarketplacePage from './EmarketplacePage'
 import EprocurementPage from './EprocurementPage'
 import EscmPage from './EscmPage'
+import EshoppingMallWizardPage from './EshoppingMallWizardPage'
 import '../../styles/SolutionPage.css'
 
 type SolutionTab = {
   id: string
   label: string
   path: string
+  bannerClass: string
   content: ReactNode
 }
 
@@ -20,25 +23,43 @@ const solutionTabs: SolutionTab[] = [
     id: 'e-erp',
     label: 'e-ERP',
     path: '/solution/e-erp',
+    bannerClass: 'erp-banner',
     content: <EerpPage />,
   },
   {
     id: 'e-scm',
     label: 'e-SCM',
     path: '/solution/e-scm',
+    bannerClass: 'scm-banner',
     content: <EscmPage />,
   },
   {
     id: 'e-procurement',
     label: 'e-Procurement',
     path: '/solution/e-procurement',
+    bannerClass: 'procure-banner',
     content: <EprocurementPage />,
   },
   {
     id: 'e-marketplace',
     label: 'e-MarketPlace',
     path: '/solution/e-marketplace',
+    bannerClass: 'market-banner',
     content: <EmarketplacePage />,
+  },
+  {
+    id: 'e-shoppingmall-wizard',
+    label: 'e-shoppingMallWizard',
+    path: '/solution/e-shoppingmall-wizard',
+    bannerClass: 'shoppingmall-banner',
+    content: <EshoppingMallWizardPage />,
+  },
+  {
+    id: 'e-homepage-wizard',
+    label: 'e-HomePageWizard',
+    path: '/solution/e-homepage-wizard',
+    bannerClass: 'homepage-banner',
+    content: <EhomePageWizardPage />,
   },
 ]
 
@@ -59,7 +80,7 @@ function SolutionPage() {
 
   return (
     <main className="sub-page">
-      <section className="sub-hero banner-message">
+      <section className={`sub-hero banner-message ${selectedTab.bannerClass}`}>
         <Container fluid>
           <h1>{selectedTab.label}</h1>
         </Container>

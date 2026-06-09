@@ -1,21 +1,28 @@
+.banner-message.message-banner {
+  background: #001d56;
+}
+
+.banner-message.message-banner h1 {
+  color: #ffffff;
+}
+
 .message-section {
   padding: 0 48px 64px;
   background: #ffffff;
 }
 
-.message-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 4px;
+.message-info {
+  max-width: 980px;
+  padding: 0 !important;
 }
 
-.message-visual {
-  min-height: 620px;
-  height: 100%;
-  background: #36a2f5;
+.message-layout {
+  display: flex;
+  justify-content: center;
 }
 
 .message-card {
+  width: min(760px, 100%);
   min-height: 620px;
   padding: 48px 32px;
   color: #1f2933;
@@ -62,14 +69,6 @@
 
   .message-section {
     padding: 0 20px 48px;
-  }
-
-  .message-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .message-thumnail {
-    display: none;
   }
 
   .message-card {

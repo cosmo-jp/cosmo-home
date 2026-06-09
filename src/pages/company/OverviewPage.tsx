@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap'
+import PrivacyMarkLink from '../../components/PrivacyMarkLink'
 import '../../styles/OverviewPage.css'
 
 const overviewItems = [
@@ -11,11 +12,19 @@ const overviewItems = [
   ['Ｅメール', 'japan@cosmo-global.com'],
   ['ＵＲＬ', 'http://www.cosmo-global.com'],
   ['事業内容', 'システムコンサルテーション<br/>システム開発運用保守<br/>電子商取引（ＥＣ）<br/>ｅ－ＭａｒｋｅｔＰｌａｃｅ<br/>電子調達システム（ｅ－Ｐｒｏｃｕｒｅｍｅｎｔ）<br/>全社的資源管理システム（ｅ－ＥＲＰ）<br/>供給網管理システム（ｅ－ＳＣＭ）<br/>Ｂｕｓｉｎｅｓｓ　Ｍｏｄｅｌ開発<br/>QuantumComputerの研究・開発<br/>ＡＩ（人工知能）の研究・開発'],
-
-  
+  ['認証マーク', 'pmark'],
 ]
 
 function renderLineBreaks(text: string) {
+  if (text === 'pmark') {
+    return (
+      <PrivacyMarkLink
+        linkClassName="overview-pmark-link"
+        imageClassName="overview-pmark"
+      />
+    )
+  }
+
   return text.split('<br/>').map((line, index, lines) => (
     <span key={`${line}-${index}`}>
       {line}
@@ -27,7 +36,7 @@ function renderLineBreaks(text: string) {
 function OverviewPage() {
   return (
     <main className="sub-page">
-      <section className="sub-hero banner-message">
+      <section className="sub-hero banner-message overview-banner">
         <Container fluid>
           <h1>会社概要</h1>
         </Container>

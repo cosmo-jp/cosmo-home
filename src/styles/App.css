@@ -118,7 +118,7 @@
   padding: 0 14px !important;
   border-radius: 0;
   color: var(--text-h) !important;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.35;
   text-decoration: none;
@@ -135,18 +135,20 @@
 .site-nav-link:hover,
 .site-nav-link.active {
   color: #ffffff !important;
-  background: #2563eb;
+  background: #001d56;
 }
 
 .hover-submenu {
   position: absolute;
   top: 100%;
   right: 0;
-  width: 280px;
+  width: max-content;
+  min-width: 197px;
+  max-width: min(520px, calc(100vw - 48px));
   height: 200px;
   padding: 28px 22px;
   border: 1px solid var(--border);
-  border-top: 3px solid #2563eb;
+  border-top: 3px solid #001d56;
   background: #ffffff;
   box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
   opacity: 0;
@@ -186,10 +188,14 @@
   text-decoration: none;
 }
 
+.submenu-link-list a {
+  white-space: nowrap;
+}
+
 .submenu-link-list li h3,
 .slide-menu-links h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.4;
 }
@@ -198,7 +204,7 @@
 .submenu-link-list a.active,
 .slide-menu-links a:hover,
 .slide-menu-links a.active {
-  color: #2563eb;
+  color: #001d56;
 }
 
 .site-mobile-menu {
@@ -304,7 +310,7 @@
     padding: 0;
     color: var(--text-h);
     background: #ffffff;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
     box-shadow: none;
   }
@@ -327,7 +333,7 @@
     min-height: 54px;
     border-bottom: 1px solid var(--border);
     color: var(--text-h);
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
     text-decoration: none;
   }
@@ -357,7 +363,7 @@
   }
 
   .banner-message {
-    text-align: center;
+    text-align: left;
   }
 
   .banner-message h1 {
