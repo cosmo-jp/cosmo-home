@@ -12,6 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
+nginx/certs/*.pem
 
 # Editor directories and files
 .vscode/*

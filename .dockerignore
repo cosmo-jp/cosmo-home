@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env
+node_modules
+dist
+dist-ssr
+*.log
+nginx/certs
+cert.pem
+key.pem

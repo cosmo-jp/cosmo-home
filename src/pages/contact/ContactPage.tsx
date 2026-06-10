@@ -1,7 +1,11 @@
 import { useState, type FormEvent } from 'react'
-import { Container } from 'react-bootstrap'
+import { Button, Container, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { submitContact, type ContactRequestBody } from '../../services/contactService'
+import {
+  ContactServiceError,
+  submitContact,
+  type ContactRequestBody,
+} from '../../services/contactService'
 import '../../styles/ContactPage.css'
 
 type ContactFieldName = Exclude<keyof ContactRequestBody, 'privacyConsent'>
@@ -21,9 +25,12 @@ function ContactPage() {
     Partial<Record<ContactFieldName, string>>
   >({})
   const [showConsentWarning, setShowConsentWarning] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setSubmitError('')
 
     const formData = new FormData(event.currentTarget)
     const body: ContactRequestBody = {
@@ -54,7 +61,19 @@ function ContactPage() {
       return
     }
 
-    await submitContact(body)
+    setIsSubmitting(true)
+
+    try {
+      await submitContact(body)
+    } catch (error: unknown) {
+      setSubmitError(
+        error instanceof ContactServiceError
+          ? error.message
+          : 'お問い合わせの送信中に予期しないエラーが発生しました。',
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -140,10 +159,37 @@ function ContactPage() {
                 個人情報保護方針に同意してください。
               </div>
             )}
-            <button className="contact-submit" type="submit">送信する</button>
+            <button
+              className="contact-submit"
+              disabled={isSubmitting}
+              type="submit"
+            >
+              {isSubmitting ? '送信中...' : '送信する'}
+            </button>
           </Container>
         </form>
       </section>
+
+      <Modal
+        centered
+        onHide={() => setSubmitError('')}
+        show={Boolean(submitError)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>送信エラー</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="contact-error-modal-body">
+          {submitError}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="contact-error-modal-close"
+            onClick={() => setSubmitError('')}
+          >
+            閉じる
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </main>
   )
 }

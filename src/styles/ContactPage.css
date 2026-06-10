@@ -166,6 +166,33 @@
   background: #ffffff;
 }
 
+.contact-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.contact-error-modal-body {
+  color: #d60000;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.contact-error-modal-close {
+  border: 2px solid #001d56;
+  color: #ffffff;
+  background: #001d56;
+  font-weight: 700;
+}
+
+.contact-error-modal-close:hover,
+.contact-error-modal-close:focus {
+  border-color: #001d56;
+  color: #001d56;
+  background: #ffffff;
+}
+
 @media (max-width: 768px) {
   .contact-section {
     padding: 0 20px 56px;
