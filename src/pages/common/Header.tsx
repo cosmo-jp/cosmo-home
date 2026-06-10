@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Accordion, Container, Dropdown, Nav, Navbar } from 'react-bootstrap'
+import { Accordion, Container, Nav, Navbar } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import cosmoLogo from '../../assets/logo/cosmologo23_highres.png'
 import '../../styles/HeaderSubmenu.css'
 
 type NavItem = {
@@ -66,52 +67,16 @@ const navItems: NavItem[] = [
   },
 ]
 
-const languageOptions = [
-  { code: 'ja', flag: '🇯🇵', labelKey: 'language.ja' },
-  { code: 'ko', flag: '🇰🇷', labelKey: 'language.ko' },
-]
-
 function Header() {
   const location = useLocation()
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
-  const currentLanguage =
-    languageOptions.find((language) => language.code === i18n.language) ??
-    languageOptions[0]
 
   useEffect(() => {
     setIsMobileMenuOpen(false)
     setHoveredMenu(null)
   }, [location.pathname])
-
-  const handleLanguageChange = (languageCode: string) => {
-    i18n.changeLanguage(languageCode)
-  }
-
-  const languageDropdown = (
-    <Dropdown align="end" className="language-dropdown">
-      <Dropdown.Toggle
-        aria-label={t('common.language')}
-        className="language-dropdown-toggle"
-        variant="light"
-      >
-        <span aria-hidden="true">{currentLanguage.flag}</span>
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        {languageOptions.map((language) => (
-          <Dropdown.Item
-            active={i18n.language === language.code}
-            key={language.code}
-            onClick={() => handleLanguageChange(language.code)}
-          >
-            <span aria-hidden="true">{language.flag}</span>
-            <span>{t(language.labelKey)}</span>
-          </Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
-    </Dropdown>
-  )
 
   return (
     <header className="site-header-wrap">
@@ -128,11 +93,11 @@ function Header() {
             onClick={() => setIsMobileMenuOpen(false)}
             to="/"
           >
-            <span className="site-logo-mark">C</span>
-            <span className="site-logo-text">
-              <strong>Cosmo</strong>
-              <small>HOME</small>
-            </span>
+            <img
+              alt="COSMO Consulting"
+              className="site-logo-image"
+              src={cosmoLogo}
+            />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="site-navbar-nav" />
@@ -191,7 +156,6 @@ function Header() {
                   </div>
                 ),
               )}
-              {languageDropdown}
             </Nav>
 
             <div className="site-mobile-menu">
@@ -231,7 +195,6 @@ function Header() {
                   ) : null,
                 )}
               </Accordion>
-              <div className="mobile-language-dropdown">{languageDropdown}</div>
             </div>
           </Navbar.Collapse>
         </Container>
